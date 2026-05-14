@@ -12,6 +12,10 @@
     <ion-card-content>
       <p><strong>Latitud:</strong> {{ latitude() }}</p>
       <p><strong>Longitud:</strong> {{ longitude() }}</p>
+
+      <p *ngIf="link()">
+        <a [href]="link()" target="_blank">Ver en Google Maps</a>
+      </p>
     </ion-card-content>
   </ion-card>
 

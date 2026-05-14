@@ -3,6 +3,7 @@ import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCon
 import { NgIf } from '@angular/common';
 import { LocationService } from '../services/location';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -17,6 +18,7 @@ import { LocationService } from '../services/location';
 export class HomePage implements OnInit, OnDestroy {
   latitude = signal<number | null>(null);
   longitude = signal<number | null>(null);
+  link = signal<string | null>(null);
   watchId: string | null = null;
   errorMsg = signal<string | null>(null);
 
@@ -33,6 +35,7 @@ export class HomePage implements OnInit, OnDestroy {
       const pos = await this.loc.getCurrentPosition();
       this.latitude.set(pos.coords.latitude);
       this.longitude.set(pos.coords.longitude);
+      this.link.set(`https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`);
       this.errorMsg.set(null);
     } catch (e: any) {
       this.errorMsg.set(e?.message ?? 'Error al obtener la ubicación actual');
